@@ -54,6 +54,10 @@ export class S3BucketStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
+    cdk.Tags.of(this.bucket).add("gs:dataClassification", "DP20");
+    cdk.Tags.of(this.bucket).add("gs:bucketFunction", "restricted-app-data");
+    cdk.Tags.of(this.bucket).add("gs:sharedViaAccessPoint", "true");
+
     this.bucket.addToResourcePolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
